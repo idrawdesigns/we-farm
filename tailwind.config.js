@@ -1,0 +1,23 @@
+module.exports = {
+  purge: ["./pages/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}"],
+  darkMode: false, // or 'media' or 'class'
+  theme: {
+    extend: {
+      colors: {
+        blues: {
+          100: "#2A2663",
+        },
+        green: {
+          100: "#1F864E",
+        },
+      },
+      fontFamily: {
+        sans: ["Roboto"],
+      },
+    },
+  },
+  variants: {
+    extend: {},
+  },
+  plugins: [],
+};

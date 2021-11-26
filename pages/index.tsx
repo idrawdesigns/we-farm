@@ -1,9 +1,10 @@
 import type { NextPage } from "next";
+import SignUpPage from "./sign-up";
 
 const Home: NextPage = () => {
   return (
     <>
-      <p>HOme page</p>
+      <SignUpPage />
     </>
   );
 };

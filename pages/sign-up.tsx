@@ -1,8 +1,10 @@
 import React from "react";
 import Image from "next/image";
 import tw, { css } from "twin.macro";
+import useWindow from "./hooks/use-window-size";
 
 const SignUpPage = () => {
+  const { isMobile } = useWindow();
   return (
     <div
       css={[
@@ -12,64 +14,108 @@ const SignUpPage = () => {
           height: 100vh;
           margin: auto;
           @media screen and (min-width: 768px) {
-            width: 390px;
+            width: 100%;
+            height: 100vh;
           }
         `,
       ]}
     >
-      <div tw=" flex flex-col-reverse justify-center h-full">
+      <div
+        css={[
+          tw`flex flex-col-reverse justify-center`,
+          css`
+            width: 100%;
+            height: 100vh;
+            margin: auto;
+            @media screen and (min-width: 768px) {
+              flex-direction: row;
+              width: 95%;
+              margin: auto;
+              align-items: center;
+            }
+          `,
+        ]}
+      >
         <div tw="grid grid-cols-3 gap-3 relative">
-          <div tw="-ml-2">
+          <div>
             <Image
-              width="100"
-              height="200"
+              width="250"
+              height="600"
               alt="woman holding a phone"
               src="/images/woman-holding-phone.svg"
-              layout="responsive"
+              layout={isMobile ? "responsive" : "intrinsic"}
             />
           </div>
 
-          <div tw="mt-10">
+          <div tw="mt-5">
             <Image
-              width="100"
-              height="200"
+              width="250"
+              height="600"
               alt="man with jembe holdomg phone"
               src="/images/man-with-jembe.svg"
-              layout="responsive"
+              layout={isMobile ? "responsive" : "intrinsic"}
             />
           </div>
 
-          <div tw="mt-24 right-8">
+          <div tw="mt-10 right-8 md:h-40 ">
             <Image
-              width="100"
-              height="200"
+              width="250"
+              height="600"
               alt="man a holding a phone"
               src="/images/man-with-apron.svg"
-              layout="responsive"
+              layout={isMobile ? "responsive" : "intrinsic"}
             />
           </div>
 
-          <div tw="absolute bottom-16 -mr-8 right-2/4 h-1/5  ">
+          <div
+            css={[
+              tw`absolute top-24 right-1/4 bg-blues-200 rounded-full h-16 w-16`,
+              css`
+                @media screen and (min-width: 768px) {
+                  display: flex;
+                  justify-content: center;
+                  width: 100px;
+                  height: 100px;
+                  margin-right: 18px;
+                  margin: auto;
+                  top: 200px;
+                }
+              `,
+            ]}
+          >
             <Image
-              width="200"
-              height="80"
-              alt="farm icon crops"
-              src="/images/we-farm-icon-crops.svg"
-            />
-          </div>
-
-          <div tw="absolute top-32 right-1/4 bg-blues-200 rounded-full h-16 w-16 ">
-            <Image
-              width="75"
-              height="85"
-              alt="man a holding a phone"
+              width="90"
+              height="90"
+              alt="we farm speech bubble"
               src="/images/wefarm-icon-speechbubble.svg"
+            />
+          </div>
+
+          <div
+            css={[
+              tw`absolute top-48 left-1/4  rounded-full h-16 w-16 `,
+              css`
+                @media screen and (min-width: 768px) {
+                  width: 150px;
+                  height: 100px;
+                  margin-right: 18px;
+                  margin: auto;
+                  top: 450px;
+                }
+              `,
+            ]}
+          >
+            <Image
+              width="120"
+              height="120"
+              alt="we farm speech bubble"
+              src="/images/we-farm-icon-crops.svg"
             />
           </div>
         </div>
 
-        <div tw="flex-wrap pl-5 w-full">
-          <p tw="font-bold text-2xl text-white">
+        <div tw="flex-wrap ml-10">
+          <p tw="font-bold text-2xl text-white md:text-3xl">
             Join Wefarm: where farmers succeed together
           </p>
 
@@ -91,17 +137,7 @@ const SignUpPage = () => {
               </button>
             </div>
 
-            <div
-              css={[
-                css`
-                  border-bottom: 0.5px solid white;
-                  opacity: 0.3;
-                  margin: auto;
-                  margin-right: 20px;
-                  margin-top: 25px;
-                `,
-              ]}
-            ></div>
+            <div tw="border-b-2 opacity-20 border-white mr-5 md:border-0"></div>
           </div>
         </div>
       </div>

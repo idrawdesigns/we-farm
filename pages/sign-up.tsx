@@ -79,8 +79,8 @@ const SignUpPage = () => {
             </p>
 
             <div tw="flex mb-2">
-              <input type="text" tw="mr-2 rounded p-2 w-3/4" />
-              <button tw=" flex  bg-greens-100  p-2 items-center content-between text-white rounded ">
+              <input type="text" tw="mr-2 rounded-md p-3 w-3/4" />
+              <button tw=" flex  bg-greens-100  p-2 items-center content-between text-white rounded-md ">
                 <p tw="text-sm pr-1">Join</p>
                 <Image
                   width="12"

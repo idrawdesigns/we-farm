@@ -1,4 +1,5 @@
 module.exports = {
+  mode: "jit",
   purge: ["./pages/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}"],
   darkMode: false, // or 'media' or 'class'
   theme: {
@@ -10,6 +11,10 @@ module.exports = {
         },
         greens: {
           100: "#1F864E",
+        },
+
+        greys: {
+          100: "#545962",
         },
       },
       fontFamily: {

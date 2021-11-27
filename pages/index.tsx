@@ -5,8 +5,8 @@ import SignUpForm from "./sign-up-form";
 const Home: NextPage = () => {
   return (
     <>
-      <SignUpForm />
-      {/* <SignUpPage /> */}
+      {/* <SignUpForm /> */}
+      <SignUpPage />
     </>
   );
 };

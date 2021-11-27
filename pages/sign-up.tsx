@@ -7,6 +7,7 @@ import get from "lodash/get";
 import ErrorMessage from "../components/error-message";
 
 import useWindow from "./hooks/use-window-size";
+import { ALL } from "dns";
 
 interface IFormInput {
   phoneNumber: number;
@@ -16,9 +17,10 @@ const SignUpPage = () => {
   const { isMobile } = useWindow();
   const {
     register,
-    formState: { errors },
+    formState: { errors, isDirty, isValid },
     handleSubmit,
-  } = useForm<IFormInput>();
+  } = useForm<IFormInput>({ mode: "onChange" });
+
   const onSubmit: SubmitHandler<IFormInput> = (data) => console.log(data);
 
   return (
@@ -150,10 +152,10 @@ const SignUpPage = () => {
                 type="number"
                 name="phoneNumber"
                 tw="mr-2 rounded-md p-2 w-3/4"
-                {...register("phoneNumber", {
+                ref={register({
                   pattern: {
                     value: /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s./0-9]/,
-                    message: "Your phone number is in valid",
+                    message: "Your Phone Number is in valid",
                   },
                   required: {
                     value: true,
@@ -170,10 +172,11 @@ const SignUpPage = () => {
                 })}
               />
 
-              <ErrorMessage
-                message={get(errors, "targetPhoneNumber.message")}
-              />
-              <button tw=" flex  bg-greens-100  p-2 items-center content-between text-white rounded-md ">
+              <button
+                type="submit"
+                tw=" flex  bg-greens-100  p-2 items-center content-between text-white rounded-md "
+                disabled={isDirty || !isValid}
+              >
                 <p tw="text-sm pr-1">Join</p>
                 <Image
                   width="12"
@@ -183,6 +186,7 @@ const SignUpPage = () => {
                 />
               </button>
             </div>
+            <ErrorMessage message={get(errors, "phoneNumber.message")} />
 
             <div tw="border-b-2 opacity-20 border-white mr-5 mt-5 md:border-0"></div>
           </div>

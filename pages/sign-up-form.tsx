@@ -35,16 +35,19 @@ const subCountyOptions = [
   },
 ];
 
+interface IFormInput {
+  phoneNumber: number;
+}
+
 const SignUpForm = () => {
   return (
     <div
       css={[
-        tw`w-full bg-green-100`,
+        tw`w-full pt-5`,
         css`
           @media screen and (min-width: 768px) {
             display: flex;
             width: 100%;
-            max-height: ;
             justify-content: center;
             align-content: center;
             align-items: center;

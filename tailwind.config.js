@@ -16,6 +16,7 @@ module.exports = {
         greys: {
           100: "#545962",
         },
+        red: "#ED1212",
       },
       fontFamily: {
         sans: ["Roboto"],

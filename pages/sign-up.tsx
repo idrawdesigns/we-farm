@@ -1,12 +1,29 @@
 import React from "react";
 import Image from "next/image";
 import tw, { css } from "twin.macro";
+import { useForm, SubmitHandler } from "react-hook-form";
+import get from "lodash/get";
+
+import ErrorMessage from "../components/error-message";
+
 import useWindow from "./hooks/use-window-size";
+
+interface IFormInput {
+  phoneNumber: number;
+}
 
 const SignUpPage = () => {
   const { isMobile } = useWindow();
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm<IFormInput>();
+  const onSubmit: SubmitHandler<IFormInput> = (data) => console.log(data);
+
   return (
-    <div
+    <form
+      onSubmit={handleSubmit(onSubmit)}
       css={[
         tw`w-full bg-blues-100`,
         css`
@@ -129,7 +146,33 @@ const SignUpPage = () => {
             </p>
 
             <div tw="flex">
-              <input type="text" tw="mr-2 rounded-md p-2 w-3/4" />
+              <input
+                type="number"
+                name="phoneNumber"
+                tw="mr-2 rounded-md p-2 w-3/4"
+                {...register("phoneNumber", {
+                  pattern: {
+                    value: /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s./0-9]/,
+                    message: "Your phone number is in valid",
+                  },
+                  required: {
+                    value: true,
+                    message: "Please enter your Phone Number",
+                  },
+                  minLength: {
+                    value: 10,
+                    message: "Your Phone Number is too short",
+                  },
+                  maxLength: {
+                    value: 10,
+                    message: "Your Phone Number is too long",
+                  },
+                })}
+              />
+
+              <ErrorMessage
+                message={get(errors, "targetPhoneNumber.message")}
+              />
               <button tw=" flex  bg-greens-100  p-2 items-center content-between text-white rounded-md ">
                 <p tw="text-sm pr-1">Join</p>
                 <Image
@@ -145,7 +188,7 @@ const SignUpPage = () => {
           </div>
         </div>
       </div>
-    </div>
+    </form>
   );
 };
 

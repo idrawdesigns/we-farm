@@ -174,7 +174,7 @@ const SignUpPage = () => {
 
               <button
                 type="submit"
-                tw=" flex  bg-greens-100  p-2 items-center content-between text-white rounded-md "
+                tw=" flex bg-greens-100 p-2 items-center content-between text-white rounded-md"
                 disabled={isDirty || !isValid}
               >
                 <p tw="text-sm pr-1">Join</p>

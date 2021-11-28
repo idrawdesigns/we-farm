@@ -1,5 +1,8 @@
 import React from "react";
 import tw, { css } from "twin.macro";
+import { useForm, SubmitHandler } from "react-hook-form";
+import ErrorMessage from "../components/error-message";
+import get from "lodash/get";
 
 const countyOptions = [
   {
@@ -36,12 +39,22 @@ const subCountyOptions = [
 ];
 
 interface IFormInput {
-  phoneNumber: number;
+  county: string;
+  subCounty: string;
 }
 
 const SignUpForm = () => {
+  const {
+    register,
+    formState: { errors, isDirty, isValid },
+    handleSubmit,
+  } = useForm<IFormInput>({ mode: "onChange" });
+
+  const onSubmit: SubmitHandler<IFormInput> = (data) => console.log(errors);
+
   return (
-    <div
+    <form
+      onSubmit={handleSubmit(onSubmit)}
       css={[
         tw`w-full pt-5`,
         css`
@@ -68,10 +81,17 @@ const SignUpForm = () => {
             County
           </label>
           <select
-            name="countyOptions"
-            tw="w-full text-sm border rounded border-greys-100 py-2 px-2.5 mb-2"
+            name="county"
+            defaultValue=""
+            ref={register({
+              required: {
+                value: true,
+                message: "Please select a county",
+              },
+            })}
+            tw="w-full text-sm border rounded border-greys-100 py-2 px-2.5"
           >
-            <option selected disabled aria-label="Select county">
+            <option value="" disabled aria-label="Select county">
               Please Choose
             </option>
             {countyOptions.map((option) => (
@@ -81,26 +101,43 @@ const SignUpForm = () => {
             ))}
           </select>
 
+          <ErrorMessage message={get(errors, "county.message")} />
+
           <label htmlFor="subcounty" tw="font-medium  mb-1 block text-sm">
             {`Sub county (optional)`}
           </label>
           <select
-            name="countyOptions"
+            name="subCounty"
+            defaultValue=""
+            ref={register({
+              required: {
+                value: true,
+                message: "Please select a sub county",
+              },
+            })}
             tw="w-full text-sm border rounded border-greys-100 py-2 px-2.5"
           >
+            <option value="" disabled aria-label="Select county">
+              Please Choose
+            </option>
             {subCountyOptions.map((option) => (
               <option key={option.id} value={option.name}>
                 {option.name}
               </option>
             ))}
           </select>
+
+          <ErrorMessage message={get(errors, "subCounty.message")} />
         </div>
 
-        <button tw="w-full py-1 mb-8 m-auto text-white rounded-md bg-greens-100  mt-5 text-sm shadow ">
+        <button
+          type="submit"
+          tw="w-full py-1 mb-8 m-auto text-white rounded-md bg-greens-100  mt-5 text-sm shadow "
+        >
           Finish
         </button>
       </div>
-    </div>
+    </form>
   );
 };
 

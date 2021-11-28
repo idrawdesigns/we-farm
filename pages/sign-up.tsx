@@ -1,13 +1,13 @@
 import React from "react";
 import Image from "next/image";
 import tw, { css } from "twin.macro";
+import { useRouter } from "next/router";
 import { useForm, SubmitHandler } from "react-hook-form";
 import get from "lodash/get";
 
 import ErrorMessage from "../components/error-message";
 
 import useWindow from "./hooks/use-window-size";
-import { ALL } from "dns";
 
 interface IFormInput {
   phoneNumber: number;
@@ -15,13 +15,17 @@ interface IFormInput {
 
 const SignUpPage = () => {
   const { isMobile } = useWindow();
+  const router = useRouter();
   const {
     register,
     formState: { errors, isDirty, isValid },
     handleSubmit,
   } = useForm<IFormInput>({ mode: "onChange" });
 
-  const onSubmit: SubmitHandler<IFormInput> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<IFormInput> = (data) => {
+    console.log(router);
+    router.push("/sign-up-form");
+  };
 
   return (
     <form
@@ -174,8 +178,11 @@ const SignUpPage = () => {
 
               <button
                 type="submit"
-                tw=" flex bg-greens-100 p-2 items-center content-between text-white rounded-md"
-                disabled={isDirty || !isValid}
+                css={[
+                  tw`flex  p-2 items-center content-between text-white rounded-md`,
+                  !isValid || !isDirty ? tw`bg-gray-400` : tw`bg-greens-100`,
+                ]}
+                // disabled={isDirty || !isValid}
               >
                 <p tw="text-sm pr-1">Join</p>
                 <Image

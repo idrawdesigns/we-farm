@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "typeRoots": ["types", "node_modules/@types"],
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
@@ -15,6 +16,12 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": [
+    "next-env.d.ts",
+    "types/twin.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "types"
+  ],
   "exclude": ["node_modules"]
 }

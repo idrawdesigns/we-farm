@@ -182,7 +182,6 @@ const SignUpPage = () => {
                   tw`flex  p-2 items-center content-between text-white rounded-md`,
                   !isValid || !isDirty ? tw`bg-gray-400` : tw`bg-greens-100`,
                 ]}
-                // disabled={isDirty || !isValid}
               >
                 <p tw="text-sm pr-1">Join</p>
                 <Image
